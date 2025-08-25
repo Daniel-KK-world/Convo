@@ -1,6 +1,7 @@
 // auth controller functions to be called in the auth routes
 
-import User from "../models/user.model";
+import { generateToken } from "../lib/utils.js";
+import User from "../models/user.model.js";
 import bcrypt from "bcryptjs"
 
 // these functions will handle the logic for signup, login, and logout, obviously   
@@ -26,13 +27,24 @@ export const signup = async (res, req) => {
         });
 
         if (newUser){
-            //generate jwt token here   
+            //generate jwt token here
+            generateToken(newUser._id, res);    
+            await newUser.save();  
+
+            res.status(201).json({
+                _id: newUser._id,
+                fullName: newUser.fullName,
+                email: newUser.email,
+                profilePic: newUser.profilePic, 
+            });
 
         }else{
             res.status(400).json({message: "Invalid user data"});
         }
 
     } catch (error) {
+        console.log("Error in signup contoller:", error.message);
+        res.status(500).json({message: "Internal Server error"}); 
         
     }
 }
