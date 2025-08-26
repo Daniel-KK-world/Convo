@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5001;
 
 app.use(express.json()); // Middleware to parse JSON request bodies | basically so I can fetch the json data.  
 
-app.use('/api/auth', authRoutes)
+app.use('/api/auth', authRoutes);
 
 app.listen(5001, () => {
     console.log('Server is running on PORT:', PORT);

@@ -5,9 +5,12 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs"
 
 // these functions will handle the logic for signup, login, and logout, obviously   
-export const signup = async (res, req) => {
+export const signup = async (req, res) => {
     const {fullName, email, password} = req.body;
     try {
+        if (!fullName || !email || !password){
+            return res.status(400).json({message: "Please enter all fields" })
+        }
         if (password.length < 6){
             return res.status(400).json({message: "Pasword must be at least 6 characters" })
         }
@@ -49,10 +52,10 @@ export const signup = async (res, req) => {
     }
 }
 
-export const login = (res, req) => {
+export const login = (req, res) => {
     res.send('login route');
 }
 
-export const logout = (res, req) => {
+export const logout = (req, res) => {
     res.send('logout route');
 }
