@@ -3,6 +3,7 @@
 import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs"
+import cloudinary from "../lib/cloudinary.js";
 
 // these functions will handle the logic for signup, login, and logout, obviously   
 export const signup = async (req, res) => {
@@ -90,5 +91,22 @@ export const logout = (req, res) => {
 }
 
 export const  updateProfile = async (req, res) => {
+    try {
+        const {profilePic} = req.body;
+        const userId = req.user._id
 
+        if(!profilePic){
+            return res.status(400).json({message: "No profile picture provided"});
+        }
+
+        // making cloudinary serve as like a bucket to store images
+        const uploadResponse = await cloudinary.uploader.upload(profilePic)
+        const updatedUser = await User.findByIdAndUpdate(userId, {profilePic: uploadResponse.secure_url}, {new: true}).select('-password')
+
+        res. status(200).json(updatedUser);
+
+    } catch (error) {
+        console.log("Error in updateProfile controller:", error.message);
+        res.status(500).json({message: "Internal Server error"});
+    }
 }
