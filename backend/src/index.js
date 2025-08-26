@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 import authRoutes from './routes/auth.route.js'; // Importing the authentication routes
 import { connectToDB } from './lib/db.js';
@@ -12,6 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 app.use(express.json()); // Middleware to parse JSON request bodies | basically so I can fetch the json data.  
+app.use(cookieParser()); // Middleware to parse cookies from incoming requests
 
 app.use('/api/auth', authRoutes);
 
