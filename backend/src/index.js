@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
 import authRoutes from './routes/auth.route.js'; // Importing the authentication routes
+import messageRoutes from './routes/message.route.js'; // Importing the authentication routes
+
 import { connectToDB } from './lib/db.js';
 
 dotenv.config(); // Load environment variables from .env file
@@ -16,6 +18,8 @@ app.use(express.json()); // Middleware to parse JSON request bodies | basically 
 app.use(cookieParser()); // Middleware to parse cookies from incoming requests
 
 app.use('/api/auth', authRoutes);
+app.use('/api/message', messageRoutes);
+
 
 app.listen(5001, () => {
     console.log('Server is running on PORT:', PORT);
