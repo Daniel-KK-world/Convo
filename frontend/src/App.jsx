@@ -3,6 +3,7 @@ function App() {
     <div className="h-screen flex items-center justify-center bg-gray-100">
       <h1 className="text-4xl font-bold text-blue-500">
         Tailwind is working!
+        <span className="badge">Badge</span>
       </h1>
     </div>
   )
