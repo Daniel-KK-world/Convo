@@ -1,10 +1,26 @@
+import Navbar from "./components/Navbar"
+import { Routes, Route } from "react-router-dom"
+import HomePage from "./pages/HomePage"
+import SignUpPage from "./pages/SignUpPage"
+import LoginPage from "./pages/LoginPage"
+import SettingsPage from "./pages/SettingsPage"
+import ProfilePage from "./pages/ProfilePage"
+import { axiosInstance } from "./lib/axios"
+
 function App() {
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-500">
-        Tailwind is working!
-        <span className="badge">Badge</span>
-      </h1>
+    <div>
+
+    <Navbar/>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/settings" element={<SettingsPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+
+    </Routes>
+
     </div>
   )
 }
