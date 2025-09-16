@@ -1,13 +1,27 @@
-import Navbar from "../components/Navbar";
+//import Navbar from "../components/Navbar";
+import { useState } from "react";
 
 const SignUpPage = () => {
+    const [showPassword, setShowPassword] = useState(false);
+    const [formData, setFormData] = useState({
+        username: "",
+        email: "",
+        password: "",
+    });
+
+    const { signup, isSigningUp } = useAuthStore();
+
+    const validateForm = () => {};
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
+
   return (
-    <div>
-      <Navbar />
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-3xl font-bold mb-4">Sign Up Page</h1>
-        <p className="text-gray-600">Create your account below.</p>
-      </div>
+    <div className="min-h-screen grid lg:grid-cols-2"></div>
+    {/*Left side */}
+    <div className="flex flex-col justify-center items-center p-6 sm:p-12 lg:px-16 xl:px-32">
+        <div className="w-full max-w-md space-y-8">
+
     </div>
   );
 };
