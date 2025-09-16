@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 import authRoutes from './routes/auth.route.js'; // Importing the authentication routes
 import messageRoutes from './routes/message.route.js'; // Importing the authentication routes
@@ -19,6 +20,12 @@ app.use(cookieParser()); // Middleware to parse cookies from incoming requests
 
 app.use('/api/auth', authRoutes);
 app.use('/api/message', messageRoutes);
+
+// CORS configuration
+app.use(cors({
+    origin: 'http://localhost:5173', // Allow requests from this origin
+    credentials: true, // Allow cookies to be sent
+}));
 
 
 app.listen(5001, () => {
